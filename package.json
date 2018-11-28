@@ -1,0 +1,28 @@
+{
+  "name": "split_testing_backend",
+  "version": "1.0.0",
+  "description": "* Node.js\r * Express.js\r * MongoDB\r * Passport.js",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.14",
+    "passport": "^0.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "webpack": "webpack",
+    "start": "npm run webpack && nodemon --exec babel-node -- bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VectreeTeamA/split_testing_backend.git"
+  },
+  "author": "Nike",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VectreeTeamA/split_testing_backend/issues"
+  },
+  "homepage": "https://github.com/VectreeTeamA/split_testing_backend#readme"
+}
