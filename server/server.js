@@ -17,8 +17,8 @@ app.use('/api', apiRoute);
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: false}));
 
-mongoose.connect(`mongodb://JerkFace:GBGBcmrf321@ds113454.mlab.com:13454/split_test`, {
-    useNewUrlParser: true
+mongoose.connect('mongodb://JerkFace:GBGBcmrf321@ds113454.mlab.com:13454/split_test', {
+  useNewUrlParser: true
 });
 mongoose.set('useFindAndModify', false);
 
