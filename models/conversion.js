@@ -2,15 +2,15 @@ let mongoose = require('mongoose');
 
 
 let conversionSchema = new mongoose.Schema({
-    owner:{
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        },
-        ownerName: String
+  owner:{
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
     },
-    conversion: [],
-    time: String
+    ownerName: String
+  },
+  conversion: [],
+  time: String
 });
 
 

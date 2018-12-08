@@ -9,7 +9,6 @@ let express = require('express'),
     apiRoute = require('./routes/api');
 
 
-app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '../client'));
 app.use(express.static(path.join(__dirname, '../client')));
 
@@ -36,5 +35,12 @@ db.once('open', () => console.log('connected to the database'));
 // checks if connection with the database is successful
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+// Set Port, hosting services will look for process.env.PORT
+app.set('port', (process.env.PORT || 8000));
+
+// start the server
+app.listen(app.get('port'), () => {
+  console.log(`Server is running on port ${app.get('port')}`);
+});
 
 module.exports = app;
