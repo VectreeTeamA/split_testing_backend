@@ -1,3 +1,5 @@
+'use strict';
+
 let express = require('express'),
     path = require('path'),
     bodyParser = require('body-parser'),
@@ -7,7 +9,6 @@ let express = require('express'),
     apiRoute = require('./routes/api');
 
 
-app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '../client'));
 app.use(express.static(path.join(__dirname, '../client')));
 
@@ -17,10 +18,29 @@ app.use('/api', apiRoute);
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: false}));
 
-mongoose.connect(`mongodb://JerkFace:GBGBcmrf321@ds113454.mlab.com:13454/split_test`, {
-    useNewUrlParser: true
+// this is our MongoDB database
+require('dotenv').config();
+const dbRoute = encodeURI(process.env.MONGO_URI);
+
+console.log(process.env.MONGO_URI);
+
+mongoose.connect(dbRoute, {
+  useNewUrlParser: true
 });
 mongoose.set('useFindAndModify', false);
 
+let db = mongoose.connection;
+
+db.once('open', () => console.log('connected to the database'));
+// checks if connection with the database is successful
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+// Set Port, hosting services will look for process.env.PORT
+app.set('port', (process.env.PORT || 8000));
+
+// start the server
+app.listen(app.get('port'), () => {
+  console.log(`Server is running on port ${app.get('port')}`);
+});
 
 module.exports = app;

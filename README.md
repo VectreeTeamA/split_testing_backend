@@ -6,4 +6,12 @@
 * MongoDB
 * Passport.js
 
-## Scope
+## Quick start
+Install dependencies:
+```$xslt
+npm install
+```
+Run project:
+```$xslt
+npm run start
+```
