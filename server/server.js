@@ -1,3 +1,5 @@
+'use strict';
+
 let express = require('express'),
     path = require('path'),
     bodyParser = require('body-parser'),
@@ -19,7 +21,8 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: false}));
 
 // this is our MongoDB database
 require('dotenv').config();
-const dbRoute = process.env.MONGO_URI;
+const dbRoute = encodeURI(process.env.MONGO_URI);
+
 console.log(process.env.MONGO_URI);
 
 mongoose.connect(dbRoute, {
@@ -28,9 +31,10 @@ mongoose.connect(dbRoute, {
 mongoose.set('useFindAndModify', false);
 
 let db = mongoose.connection;
-db.once("open", () => console.log("connected to the database"));
+
+db.once('open', () => console.log('connected to the database'));
 // checks if connection with the database is successful
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
 module.exports = app;
