@@ -17,10 +17,20 @@ app.use('/api', apiRoute);
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: false}));
 
-mongoose.connect('mongodb://JerkFace:GBGBcmrf321@ds113454.mlab.com:13454/split_test', {
+// this is our MongoDB database
+require('dotenv').config();
+const dbRoute = process.env.MONGO_URI;
+console.log(process.env.MONGO_URI);
+
+mongoose.connect(dbRoute, {
   useNewUrlParser: true
 });
 mongoose.set('useFindAndModify', false);
+
+let db = mongoose.connection;
+db.once("open", () => console.log("connected to the database"));
+// checks if connection with the database is successful
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 
 module.exports = app;
